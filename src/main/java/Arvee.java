@@ -33,34 +33,16 @@ public class Arvee {
                 System.out.println(String.format("Ok, I've marked this task as not done yet:\n %s", change));
             }
             else {
-                Task next = new Task(input);
+                if (input.startsWith("todo")) {
+                    String task = input.substring(5);
+                    Task next = new ToDoTask(task);
+                } else if (input.startsWith("deadline")) {
+
+                }
                 items.add(next);
                 System.out.println("added: " + input);
             }
         }
     }
 
-    public static class Task {
-        private String desc;
-        private boolean done;
-
-        public Task(String desc) {
-            this.desc = desc;
-            this.done = false;
-        }
-
-        private void setDone(boolean status) {
-            this.done = status;
-        }
-
-        private String getDesc() {
-            return this.desc;
-        }
-
-        @Override
-        public String toString() {
-            String status = this.done ? "X" : " ";
-            return String.format("[%s] %s", status, this.desc);
-        }
-    }
 }
