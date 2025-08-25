@@ -14,6 +14,7 @@ public class Arvee {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")) {
+                System.out.println("Here are the tasks in your list:");
                 int size = items.size();
                 for (int i = 0; i < size; i++) {
                     String out = String.format("%s. %s", i + 1, items.get(i));
@@ -33,14 +34,29 @@ public class Arvee {
                 System.out.println(String.format("Ok, I've marked this task as not done yet:\n %s", change));
             }
             else {
+                Task next = null;
                 if (input.startsWith("todo")) {
                     String task = input.substring(5);
-                    Task next = new ToDoTask(task);
+                    next = new ToDoTask(task);
                 } else if (input.startsWith("deadline")) {
-
+                    String rest = input.substring(9).trim();
+                    String[] parts = rest.split("/by", 2);
+                    String task = parts[0];
+                    String deadline = parts[1];
+                    next = new Deadlines(task, deadline);
+                } else if (input.startsWith("event")) {
+                    String rest = input.substring(6).trim();
+                    String[] parts = rest.split("/from", 2);
+                    String task = parts[0].trim();
+                    String[] timeParts = parts[1].split("/to",2);
+                    String start = timeParts[0];
+                    String end = timeParts[1];
+                    next = new Event(task, start, end);
                 }
                 items.add(next);
-                System.out.println("added: " + input);
+                System.out.println(String.format("Got it. I've added this task:\n" +
+                        " %s\n" +
+                        "Now you have %s tasks in the list.", next, items.size()));
             }
         }
     }

@@ -6,6 +6,6 @@ public class ToDoTask extends Task {
 
     @Override
     public String toString() {
-        return String.format("[T] %S", super.toString());
+        return String.format("[T]%S", super.toString());
     }
 }
