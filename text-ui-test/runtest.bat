@@ -1,21 +1,45 @@
-@ECHO OFF
+@echo off
+setlocal
 
-REM create bin directory if it doesn't exist
-if not exist ..\bin mkdir ..\bin
+set "SRC=..\src\main\java"
+set "BIN=..\bin"
 
-REM delete output from previous run
+REM --- clean bin to avoid stale classes ---
+if exist "%BIN%" rmdir /S /Q "%BIN%"
+mkdir "%BIN%"
+
+REM --- clean old output ---
 if exist ACTUAL.TXT del ACTUAL.TXT
 
-REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\*.java
-IF ERRORLEVEL 1 (
-    echo ********** BUILD FAILURE **********
-    exit /b 1
+REM --- collect all sources recursively (handles subpackages) ---
+dir /s /b "%SRC%\*.java" > sources.txt
+if %errorlevel% neq 0 (
+  echo No Java sources found under %SRC%
+  exit /b 1
 )
-REM no error here, errorlevel == 0
 
-REM run the program, feed commands from input.txt file and redirect the output to the ACTUAL.TXT
-java -classpath ..\bin Duke < input.txt > ACTUAL.TXT
+REM --- compile everything into bin ---
+javac -Xlint:none -d "%BIN%" @sources.txt
+if errorlevel 1 (
+  echo ********** BUILD FAILURE **********
+  del sources.txt
+  exit /b 1
+)
+del sources.txt
 
-REM compare the output to the expected output
-FC ACTUAL.TXT EXPECTED.TXT
+REM --- detect where Arvee.class ended up and run it ---
+set "MAIN="
+if exist "%BIN%\Arvee.class" set "MAIN=Arvee"
+if exist "%BIN%\duke\Arvee.class" set "MAIN=duke.Arvee"
+
+if not defined MAIN (
+  echo Could not find Arvee.class after compile. Do you have a different main class?
+  exit /b 1
+)
+
+java -cp "%BIN%" %MAIN% < input.txt > ACTUAL.TXT
+
+REM --- compare output ---
+fc ACTUAL.TXT EXPECTED.TXT
+
+endlocal
