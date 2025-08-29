@@ -3,45 +3,44 @@ What can I do for you?
 Got it. I've added this task:
  [T][ ] homework
 Now you have 1 tasks in the list.
-Could not parse date/time: " Sunday"
-Could not parse date/time: " Mon 2pm "
+Error: Could not parse date/time: "Sunday"
+Error: Could not parse date/time: "Mon 2pm"
 Got it. I've added this task:
- [D][ ] return book  (by: October 15 2019)
+ [D][ ] return book (by: October 15 2019)
 Now you have 2 tasks in the list.
 Got it. I've added this task:
- [D][ ] return book  (by: Oct 15 2019)
+ [D][ ] return book (by: Oct 15 2019 6:00 pm)
 Now you have 3 tasks in the list.
 Got it. I've added this task:
- [D][ ] return book  (by: Dec 2 2019)
+ [D][ ] return book (by: Dec 2 2019 6:00 pm)
 Now you have 4 tasks in the list.
 Got it. I've added this task:
- [E][ ] proj meeting (from: Aug 6 2019 to: Aug 6 2019)
+ [E][ ] proj meeting (from: Aug 6 2019 2:00 pm to: Aug 6 2019 4:00 pm)
 Now you have 5 tasks in the list.
 Got it. I've added this task:
- [E][ ] proj meeting (from: Dec 2 2019 to: Dec 2 2019)
+ [E][ ] proj meeting (from: Dec 2 2019 2:00 am to: Dec 2 2019 4:00 am)
 Now you have 6 tasks in the list.
 Here are the tasks in your list:
 1. [T][ ] homework
-2. [D][ ] return book  (by: October 15 2019)
-3. [D][ ] return book  (by: Oct 15 2019)
-4. [D][ ] return book  (by: Dec 2 2019)
-5. [E][ ] proj meeting (from: Aug 6 2019 to: Aug 6 2019)
-6. [E][ ] proj meeting (from: Dec 2 2019 to: Dec 2 2019)
-Noted. I've removed this task:
-[E][ ] proj meeting (from: Aug 6 2019 to: Aug 6 2019)
-Now you have 5 tasks in the list.
+2. [D][ ] return book (by: October 15 2019)
+3. [D][ ] return book (by: Oct 15 2019 6:00 pm)
+4. [D][ ] return book (by: Dec 2 2019 6:00 pm)
+5. [E][ ] proj meeting (from: Aug 6 2019 2:00 pm to: Aug 6 2019 4:00 pm)
+6. [E][ ] proj meeting (from: Dec 2 2019 2:00 am to: Dec 2 2019 4:00 am)
+Sorry, I didn't understand that command.
 Here are the tasks in your list:
 1. [T][ ] homework
-2. [D][ ] return book  (by: October 15 2019)
-3. [D][ ] return book  (by: Oct 15 2019)
-4. [D][ ] return book  (by: Dec 2 2019)
-5. [E][ ] proj meeting (from: Dec 2 2019 to: Dec 2 2019)
-Noted. I've removed this task:
-[D][ ] return book  (by: October 15 2019)
-Now you have 4 tasks in the list.
+2. [D][ ] return book (by: October 15 2019)
+3. [D][ ] return book (by: Oct 15 2019 6:00 pm)
+4. [D][ ] return book (by: Dec 2 2019 6:00 pm)
+5. [E][ ] proj meeting (from: Aug 6 2019 2:00 pm to: Aug 6 2019 4:00 pm)
+6. [E][ ] proj meeting (from: Dec 2 2019 2:00 am to: Dec 2 2019 4:00 am)
+Sorry, I didn't understand that command.
 Here are the tasks in your list:
 1. [T][ ] homework
-2. [D][ ] return book  (by: Oct 15 2019)
-3. [D][ ] return book  (by: Dec 2 2019)
-4. [E][ ] proj meeting (from: Dec 2 2019 to: Dec 2 2019)
+2. [D][ ] return book (by: October 15 2019)
+3. [D][ ] return book (by: Oct 15 2019 6:00 pm)
+4. [D][ ] return book (by: Dec 2 2019 6:00 pm)
+5. [E][ ] proj meeting (from: Aug 6 2019 2:00 pm to: Aug 6 2019 4:00 pm)
+6. [E][ ] proj meeting (from: Dec 2 2019 2:00 am to: Dec 2 2019 4:00 am)
 Bye. Hope to see you again soon!
