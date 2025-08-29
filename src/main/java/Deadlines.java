@@ -1,14 +1,21 @@
+import java.time.LocalDateTime;
+
 public class Deadlines extends Task {
 
-    private String deadline;
+    private LocalDateTime deadline;
 
-    public Deadlines(String desc, String deadline) {
+    public Deadlines(String desc, LocalDateTime deadline) {
         super(desc);
         this.deadline = deadline;
     }
 
+    public LocalDateTime getBy() {
+        return this.deadline;
+    }
+
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadline);
+        return String.format("[D]%s (by: %s)", super.toString(),
+                DateTimeUtil.formatSmart(deadline));
     }
 }

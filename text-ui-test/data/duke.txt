@@ -1,0 +1,4 @@
+T | 0 | homework
+D | 0 | return book  | 2019-10-15T18:00
+D | 0 | return book  | 2019-12-02T18:00
+E | 0 | proj meeting | 2019-12-02T02:00 | 2019-12-02T04:00

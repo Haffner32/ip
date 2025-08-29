@@ -1,0 +1,2 @@
+T | 1 | practice sax
+E | 0 | practice | Mon 2pm | 4pm
