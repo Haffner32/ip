@@ -1,3 +1,5 @@
+package arvee.model;
+
 public class ToDoTask extends Task {
 
     public ToDoTask(String desc) {

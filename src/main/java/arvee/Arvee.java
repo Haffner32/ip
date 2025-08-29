@@ -1,8 +1,11 @@
-import java.sql.SQLOutput;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Scanner;
-import java.util.ArrayList;
+package arvee;
+
+import arvee.logic.CommandResult;
+import arvee.logic.TaskList;
+import arvee.model.Task;
+import arvee.parser.Parser;
+import arvee.storage.Storage;
+import arvee.ui.Ui;
 
 public class Arvee {
     public static void main(String[] args) {

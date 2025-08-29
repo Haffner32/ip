@@ -1,3 +1,7 @@
+package arvee.logic;
+
+import arvee.model.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 

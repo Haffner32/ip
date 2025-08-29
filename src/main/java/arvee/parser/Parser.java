@@ -1,3 +1,11 @@
+package arvee.parser;
+
+import arvee.logic.CommandResult;
+import arvee.util.DateTimeUtil;
+import arvee.model.ToDoTask;
+import arvee.model.Deadlines;
+import arvee.model.Event;
+
 public class Parser {
     public static CommandResult parse(String input) {
         input = input.trim();
@@ -26,9 +34,9 @@ public class Parser {
         if (input.startsWith("event")) {
             String rest = input.substring(6).trim();
             String[] p1 = rest.split("/from", 2);
-            if (p1.length < 2) return CommandResult.error("Event format: event <desc> /from <start> /to <end>");
+            if (p1.length < 2) return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
             String[] p2 = p1[1].trim().split("/to", 2);
-            if (p2.length < 2) return CommandResult.error("Event format: event <desc> /from <start> /to <end>");
+            if (p2.length < 2) return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
             var start = DateTimeUtil.parseFlexible(p2[0].trim());
             var end   = DateTimeUtil.parseFlexible(p2[1].trim());
             return CommandResult.add(new Event(p1[0].trim(), start, end));

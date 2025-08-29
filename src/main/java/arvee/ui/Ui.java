@@ -1,4 +1,8 @@
+package arvee.ui;
+
 import java.util.Scanner;
+import arvee.logic.TaskList;
+import arvee.model.Task;
 
 public class Ui {
     private final Scanner sc = new Scanner(System.in);

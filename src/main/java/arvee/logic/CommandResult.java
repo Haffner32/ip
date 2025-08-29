@@ -1,5 +1,9 @@
+package arvee.logic;
+
+import arvee.model.Task;
+
 public class CommandResult {
-    enum Type { BYE, LIST, MARK, ADD, ERROR }
+    public enum Type { BYE, LIST, MARK, ADD, ERROR }
     public final Type type;
     public final Task task;           // for ADD
     public final Integer index;       // for MARK (1-based)

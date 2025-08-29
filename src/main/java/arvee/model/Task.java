@@ -1,3 +1,5 @@
+package arvee.model;
+
 public class Task {
     private String desc;
     private boolean done;
