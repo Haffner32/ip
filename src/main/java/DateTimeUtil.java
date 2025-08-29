@@ -21,7 +21,7 @@ public class DateTimeUtil {
     );
 
     private static final DateTimeFormatter DATE_FMT = DateTimeFormatter.ofPattern("MMMM d yyyy");
-    private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern("MMM d yyyy");
+    private static final DateTimeFormatter DATETIME_FMT = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");
 
     public static LocalDateTime parseFlexible(String text) {
         String s = text.trim();
