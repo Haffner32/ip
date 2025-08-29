@@ -15,6 +15,10 @@ public class Task {
         return this.desc;
     }
 
+    public boolean isDone() {
+        return this.done;
+    }
+
     @Override
     public String toString() {
         String status = this.done ? "X" : " ";

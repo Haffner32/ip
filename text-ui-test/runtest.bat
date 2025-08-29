@@ -4,21 +4,24 @@ setlocal
 set "SRC=..\src\main\java"
 set "BIN=..\bin"
 
-REM --- clean bin to avoid stale classes ---
+REM
 if exist "%BIN%" rmdir /S /Q "%BIN%"
 mkdir "%BIN%"
 
-REM --- clean old output ---
+REM
 if exist ACTUAL.TXT del ACTUAL.TXT
 
-REM --- collect all sources recursively (handles subpackages) ---
+REM
+if exist data\duke.txt del data\duke.txt
+
+REM
 dir /s /b "%SRC%\*.java" > sources.txt
 if %errorlevel% neq 0 (
   echo No Java sources found under %SRC%
   exit /b 1
 )
 
-REM --- compile everything into bin ---
+REM
 javac -Xlint:none -d "%BIN%" @sources.txt
 if errorlevel 1 (
   echo ********** BUILD FAILURE **********
@@ -27,7 +30,7 @@ if errorlevel 1 (
 )
 del sources.txt
 
-REM --- detect where Arvee.class ended up and run it ---
+REM
 set "MAIN="
 if exist "%BIN%\Arvee.class" set "MAIN=Arvee"
 if exist "%BIN%\duke\Arvee.class" set "MAIN=duke.Arvee"
@@ -39,7 +42,7 @@ if not defined MAIN (
 
 java -cp "%BIN%" %MAIN% < input.txt > ACTUAL.TXT
 
-REM --- compare output ---
+REM
 fc ACTUAL.TXT EXPECTED.TXT
 
 endlocal

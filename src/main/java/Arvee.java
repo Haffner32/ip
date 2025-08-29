@@ -1,4 +1,6 @@
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -7,7 +9,7 @@ public class Arvee {
         System.out.println("Hello! I'm ARVEE" +
                 "\n" + "What can I do for you?");
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> items = new ArrayList<>();
+        ArrayList<Task> items = new ArrayList<>(Storage.load());
         while (sc.hasNextLine()) {
             String input = sc.nextLine().trim();
             if (input.equals("bye")) {
@@ -26,6 +28,7 @@ public class Arvee {
                     System.out.println("Noted. I've removed this task:\n" +
                             toRemove.toString() +
                             "\nNow you have " + items.size() + " tasks in the list.");
+                    Storage.save(items);
                     continue;
                 }
                 if (input.equals("list")) {
@@ -35,6 +38,7 @@ public class Arvee {
                         String out = String.format("%s. %s", i + 1, items.get(i));
                         System.out.println(out);
                     }
+                    Storage.save(items);
                     continue;
                 }
 
@@ -44,6 +48,7 @@ public class Arvee {
                     change.setDone(true);
                     items.set(index, change);
                     System.out.println(String.format("Nice! I've marked this task as done:\n %s", change));
+                    Storage.save(items);
                     continue;
                 }
 
@@ -53,6 +58,7 @@ public class Arvee {
                     change.setDone(false);
                     items.set(index, change);
                     System.out.println(String.format("Ok, I've marked this task as not done yet:\n %s", change));
+                    Storage.save(items);
                     continue;
                 }
                 if (input.startsWith("todo")) {
@@ -62,33 +68,51 @@ public class Arvee {
                     System.out.println(String.format("Got it. I've added this task:\n" +
                             " %s\n" +
                             "Now you have %s tasks in the list.", next, items.size()));
+                    Storage.save(items);
                     continue;
                 }
                 if (input.startsWith("deadline")) {
                     String rest = requireNonBlank(input.substring(8).trim());
                     String[] parts = rest.split("/by", 2);
                     String task = parts[0];
-                    String deadline = parts[1];
-                    Task next = new Deadlines(task, deadline);
-                    items.add(next);
-                    System.out.println(String.format("Got it. I've added this task:\n" +
-                            " %s\n" +
-                            "Now you have %s tasks in the list.", next, items.size()));
-                    continue;
+                    String raw = parts[1];
+                    try {
+                        LocalDateTime by = DateTimeUtil.parseFlexible(raw);
+                        Task next = new Deadlines(task, by);
+                        items.add(next);
+                        System.out.println(String.format("Got it. I've added this task:\n" +
+                                " %s\n" +
+                                "Now you have %s tasks in the list.", next, items.size()));
+                        Storage.save(items);
+                        continue;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
                 }
+
                 if (input.startsWith("event")) {
                     String rest = requireNonBlank(input.substring(5).trim());
                     String[] parts = rest.split("/from", 2);
                     String task = parts[0].trim();
                     String[] timeParts = parts[1].split("/to",2);
-                    String start = timeParts[0];
-                    String end = timeParts[1];
-                    Task next = new Event(task, start, end);
-                    items.add(next);
-                    System.out.println(String.format("Got it. I've added this task:\n" +
-                            " %s\n" +
-                            "Now you have %s tasks in the list.", next, items.size()));
-                    continue;
+                    String startRaw = timeParts[0];
+                    String endRaw = timeParts[1];
+                    try {
+                        LocalDateTime start = DateTimeUtil.parseFlexible(startRaw);
+                        LocalDateTime end = DateTimeUtil.parseFlexible(endRaw);
+                        Task next = new Event(task, start, end);
+                        items.add(next);
+                        System.out.println(String.format("Got it. I've added this task:\n" +
+                                " %s\n" +
+                                "Now you have %s tasks in the list.", next, items.size()));
+                        Storage.save(items);
+                        continue;
+                    } catch (IllegalArgumentException e) {
+                        System.out.println(e.getMessage());
+                        continue;
+                    }
+
                 }
                 throw new UnknownCommandException();
             } catch (EmptyDescriptionException | InvalidArgumentException | InvalidIndexException e) {

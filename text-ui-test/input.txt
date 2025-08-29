@@ -1,6 +1,11 @@
 todo homework
 deadline return book /by Sunday
 event project meeting /from Mon 2pm /to 4pm
+deadline return book /by 2019-10-15
+deadline return book /by 2019-10-15 1800
+deadline return book /by 2/12/2019 1800
+event proj meeting /from 2019-08-06 1400 /to 2019-08-06 1600
+event proj meeting /from 2/12/2019 2:00 /to 2/12/2019 4:00
 list
 delete 5
 list
