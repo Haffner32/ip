@@ -2,3 +2,4 @@ T | 0 | practice sax
 T | 0 | gym
 E | 0 | lecture | 2025-12-29T14:00 | 2025-12-29T18:00
 T | 0 | clean
+T | 0 | go for lesson
