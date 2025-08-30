@@ -58,6 +58,14 @@ public class Parser {
                 return CommandResult.error("Index must be a number");
             }
         }
+        if (input.startsWith("find")) {
+            String[] parts = input.trim().split("\\s", 2);
+            if (parts.length < 2) {
+                return CommandResult.error("Usage: find KEYWORD");
+            }
+            String keyword = parts[1].trim();
+            return CommandResult.find(keyword);
+        }
 
         return CommandResult.error("Sorry, I didn't understand that command.");
     }

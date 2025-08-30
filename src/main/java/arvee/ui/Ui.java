@@ -84,6 +84,19 @@ public class Ui {
     }
 
     /**
+     * prints out the list of tasks with the matching keyword
+     * @param tasks list of tasks
+     */
+    public void showFound(TaskList tasks) {
+        System.out.println("Here are the matching tasks in your list:");
+        int size = tasks.size();
+        for (int i = 1; i < size + 1; i++) {
+            String out = String.format("%s. %s", i, tasks.get(i));
+            System.out.println(out);
+        }
+    }
+
+    /**
      * prints a message as the program terminates
      */
     public void showBye() {

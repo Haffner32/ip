@@ -30,6 +30,12 @@ public class Arvee {
             }
 
             switch (r.type) {
+                case FIND: {
+                    String keyword = r.error;
+                    TaskList results = new TaskList(tasks.find(keyword));
+                    ui.showFound(results);
+                    break;
+                }
 
                 case DELETE: {
                     Task deleted = tasks.get(r.index);
