@@ -7,6 +7,11 @@ import arvee.model.Deadlines;
 import arvee.model.Event;
 
 public class Parser {
+    /**
+     * parses the corresponding input for the command word, and creates a corresponding CommandResult object
+     * @param input the command
+     * @return
+     */
     public static CommandResult parse(String input) {
         input = input.trim();
         if (input.equals("bye")) return CommandResult.bye();

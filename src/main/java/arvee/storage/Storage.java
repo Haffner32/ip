@@ -15,6 +15,10 @@ import arvee.model.Event;
 public class Storage {
     private static final Path SAVE_PATH = Paths.get("data", "duke.txt");
 
+    /**
+     * loads the saved list of tasks from the txt file into the program
+     * @return the corresponding arraylist of tasks
+     */
     public static List<Task> load() {
         List<Task> items = new ArrayList<>();
 
@@ -88,6 +92,10 @@ public class Storage {
         return items;
     }
 
+    /**
+     * saves the list of tasks after each mutating command is called
+     * @param items the current list after changes are made
+     */
     public static void save(List<Task> items) {
         try {
             Files.createDirectories(SAVE_PATH.getParent());
@@ -110,6 +118,11 @@ public class Storage {
         }
     }
 
+    /**
+     * saves each task as a string that is saved in the txt file
+     * @param t task
+     * @return string format for each task
+     */
     private static String serialize(Task t) {
         int done = t.isDone() ? 1 : 0;
 
