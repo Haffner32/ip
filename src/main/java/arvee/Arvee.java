@@ -7,6 +7,11 @@ import arvee.parser.Parser;
 import arvee.storage.Storage;
 import arvee.ui.Ui;
 
+/**
+ * Represents the main entry point of the Arvee chatbot application.
+ * Handles the program loop by coordinating user input, parsing commands,
+ * updating the task list, and saving/loading from storage.
+ */
 public class Arvee {
     public static void main(String[] args) {
         Ui ui = new Ui();

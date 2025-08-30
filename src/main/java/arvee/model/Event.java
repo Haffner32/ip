@@ -8,16 +8,30 @@ public class Event extends Task {
     private LocalDateTime start;
     private LocalDateTime end;
 
+    /**
+     * Constructor for the event task
+     * @param desc description for the tasks
+     * @param start start date/time
+     * @param end end date/time
+     */
     public Event(String desc, LocalDateTime start, LocalDateTime end) {
         super(desc);
         this.start = start;
         this.end = end;
     }
 
+    /**
+     * getter for the start time
+     * @return date/time for start
+     */
     public LocalDateTime getStart() {
         return this.start;
     }
 
+    /**
+     * getter for end time
+     * @return date/time for end
+     */
     public LocalDateTime getEnd() {
         return this.end;
     }
