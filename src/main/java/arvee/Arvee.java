@@ -25,6 +25,14 @@ public class Arvee {
             }
 
             switch (r.type) {
+
+                case DELETE: {
+                    Task deleted = tasks.get(r.index);
+                    tasks.remove(r.index);
+                    ui.showDeleted(deleted, tasks.size());
+                    Storage.save(tasks.asList());
+                    break;
+                }
                 case BYE:
                     ui.showBye();
                     return;
@@ -49,6 +57,7 @@ public class Arvee {
                 case ERROR:
                     ui.showError(r.error);
                     break;
+
             }
         }
     }

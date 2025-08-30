@@ -41,6 +41,18 @@ public class Parser {
             var end   = DateTimeUtil.parseFlexible(p2[1].trim());
             return CommandResult.add(new Event(p1[0].trim(), start, end));
         }
+        if (input.startsWith("delete")) {
+            String[] parts = input.trim().split("\\s", 2);
+            if (parts.length < 2) {
+                return CommandResult.error("Usage: delete INDEX");
+            }
+            try {
+                int index = Integer.parseInt(parts[1]);
+                return CommandResult.delete(index);
+            } catch (NumberFormatException e) {
+                return CommandResult.error("Index must be a number");
+            }
+        }
 
         return CommandResult.error("Sorry, I didn't understand that command.");
     }

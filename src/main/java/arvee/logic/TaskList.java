@@ -20,7 +20,8 @@ public class TaskList {
         return items.size();
     }
 
-    public Task get(int index) {
+    public Task get(int oneBasedIndex) {
+        int index = oneBasedIndex - 1;
         return items.get(index);
     }
 
@@ -28,7 +29,8 @@ public class TaskList {
         items.add(t);
     }
 
-    public void remove(int index) {
+    public void remove(int oneIndex) {
+        int index = oneIndex - 1;
         items.remove(index);
     }
 

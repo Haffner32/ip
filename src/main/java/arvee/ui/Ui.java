@@ -27,8 +27,8 @@ public class Ui {
     public void showList(TaskList tasks) {
         System.out.println("Here are the tasks in your list:");
         int size = tasks.size();
-        for (int i = 0; i < size; i++) {
-            String out = String.format("%s. %s", i + 1, tasks.get(i));
+        for (int i = 1; i < size + 1; i++) {
+            String out = String.format("%s. %s", i, tasks.get(i));
             System.out.println(out);
         }
     }
@@ -45,6 +45,12 @@ public class Ui {
         } else {
             System.out.println(String.format("Ok, I've marked this task as not done yet:\n %s", t));
         }
+    }
+
+    public void showDeleted(Task t, int remaining) {
+        System.out.println("Noted. I've removed this task:");
+        System.out.println("  " + t);
+        System.out.println("Now you have " + remaining + " tasks in the list.");
     }
 
     public void showBye() {
