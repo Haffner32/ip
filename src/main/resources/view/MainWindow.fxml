@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="arvee.ui.MainWindow">
+
+    <children>
+        <ScrollPane fx:id="scrollPane"
+                    fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    vvalue="1.0"
+                    prefHeight="560.0"
+                    AnchorPane.topAnchor="8.0"
+                    AnchorPane.leftAnchor="8.0"
+                    AnchorPane.rightAnchor="8.0"
+                    AnchorPane.bottomAnchor="56.0">
+            <content>
+                <VBox fx:id="dialogContainer"
+                      spacing="8.0" />
+            </content>
+        </ScrollPane>
+
+        <TextField fx:id="userInput"
+                   promptText="Type a message..."
+                   onAction="#handleUserInput"
+                   AnchorPane.bottomAnchor="8.0"
+                   AnchorPane.leftAnchor="8.0"
+                   AnchorPane.rightAnchor="84.0"/>
+
+        <Button fx:id="sendButton"
+                text="Send"
+                onAction="#handleUserInput"
+                prefWidth="68.0"
+                AnchorPane.rightAnchor="8.0"
+                AnchorPane.bottomAnchor="8.0"/>
+    </children>
+</AnchorPane>

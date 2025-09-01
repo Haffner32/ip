@@ -1,8 +1,12 @@
+package arvee.ui;
+
+import java.io.IOException;
 import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -15,8 +19,11 @@ import javafx.scene.layout.HBox;
  * represents the graphical interface for the dialogue box
  */
 public class DialogBox extends HBox {
-    private final Label text = new Label();
-    private final ImageView displayPicture = new ImageView();
+    @FXML
+    private Label dialog;
+    @FXML
+    private ImageView displayPicture;
+
 
     /**
      *  Constructor for the dialogue box
@@ -24,18 +31,21 @@ public class DialogBox extends HBox {
      * @param i image
      */
     private DialogBox(String s, Image i) {
-        super(8);
-        text.setText(s);
-        text.setWrapText(true);
-
-        displayPicture.setImage(i);
-        displayPicture.setFitWidth(40);
-        displayPicture.setFitHeight(40);
-        displayPicture.setPreserveRatio(true);
-
-        setAlignment(Pos.TOP_RIGHT);
-        setPadding(new Insets(8, 10, 8, 10));
-        getChildren().addAll(text, displayPicture);
+        try {
+            FXMLLoader fxml = new FXMLLoader(getClass().getResource("/view/DialogBox.fxml"));
+            fxml.setController(this);
+            fxml.setRoot(this);
+            fxml.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        dialog.setText(s);
+        if (i != null) {
+            displayPicture.setImage(i);
+        } else {
+            displayPicture.setVisible(false);
+            displayPicture.setManaged(false);
+        }
     }
 
     /**
