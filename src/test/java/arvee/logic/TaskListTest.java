@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
 
+    /**
+     * Test to check whether the marking logic of the tasks works.
+     */
     @Test
     @DisplayName("Mark and unmark by 1-based index changes task done state")
     void markAndUnmark() {
