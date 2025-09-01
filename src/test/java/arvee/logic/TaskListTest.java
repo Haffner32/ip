@@ -27,6 +27,9 @@ public class TaskListTest {
         assertFalse(list.get(0).isDone(), "Stored task should reflect change");
     }
 
+    /**
+     * Test to check whether the index marking will throw error for out of bounds index
+     */
     @Test
     @DisplayName("Marking with out-of-range index throws IndexOutOfBoundsException")
     void markOutOfRange() {
