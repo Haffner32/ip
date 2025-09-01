@@ -30,6 +30,7 @@ public class TaskListTest {
     /**
      * Test to check whether the index marking will throw error for out of bounds index
      */
+    @SuppressWarnings("checkstyle:SingleSpaceSeparator")
     @Test
     @DisplayName("Marking with out-of-range index throws IndexOutOfBoundsException")
     void markOutOfRange() {
