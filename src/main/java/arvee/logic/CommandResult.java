@@ -3,7 +3,7 @@ package arvee.logic;
 import arvee.model.Task;
 
 public class CommandResult {
-    public enum Type { BYE, LIST, MARK, ADD, DELETE, ERROR, FIND }
+    public enum Type { BYE, LIST, MARK, ADD, DELETE, ERROR, FIND, SORT }
     public final Type type;
     public final Task task;           // for ADD
     public final Integer index;       // for MARK (1-based)
@@ -82,6 +82,10 @@ public class CommandResult {
      */
     public static CommandResult find(String keyword) {
         return new CommandResult(Type.FIND, null, null, null, keyword);
+    }
+
+    public static CommandResult sort(String command) {
+        return new CommandResult(Type.SORT, null, null, null, command);
     }
 }
 

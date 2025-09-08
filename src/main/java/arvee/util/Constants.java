@@ -12,6 +12,6 @@ public final class Constants {
     public static final String CMD_DELETE = "delete";
     public static final String CMD_FIND = "find";
     public static final String CMD_BYE = "bye";
-
+    public static final String CMD_SORT = "sort";
 }
 

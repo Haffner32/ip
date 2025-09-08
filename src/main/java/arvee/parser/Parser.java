@@ -19,6 +19,14 @@ public class Parser {
       assert !input.isEmpty() : "User input should not be empty";
         if (input.equals(Constants.CMD_BYE)) return CommandResult.bye();
         if (input.equals(Constants.CMD_LIST)) return CommandResult.list();
+        if (input.equals(Constants.CMD_SORT)) {
+            return CommandResult.sort("asc");
+        }
+
+        if (input.startsWith(Constants.CMD_SORT)) {
+            String arg = input.substring(5).trim().toLowerCase();
+            return CommandResult.sort(arg);
+        }
 
 
         if (input.startsWith(Constants.CMD_MARK + " ")) {
