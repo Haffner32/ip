@@ -1,6 +1,8 @@
 package arvee.model;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
+
 import arvee.util.DateTimeUtil;
 
 public class Deadlines extends Task {
@@ -23,6 +25,11 @@ public class Deadlines extends Task {
      */
     public LocalDateTime getBy() {
         return this.deadline;
+    }
+
+    @Override
+    public Optional<LocalDateTime> getSortKey() {
+        return Optional.of(this.getBy());
     }
 
     @Override

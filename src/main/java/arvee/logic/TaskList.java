@@ -2,7 +2,9 @@ package arvee.logic;
 
 import arvee.model.Task;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class TaskList {
@@ -96,5 +98,27 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    /**
+     *  Sorts tasks by date/time ascending first, then by alphabetical order. Tasks with no date go to the end.
+     */
+    public void sortByDateAscending() {
+        Comparator<Task> cmp = Comparator
+                .comparing((Task t) -> t.getSortKey().isEmpty())
+                .thenComparing((Task t) -> t.getSortKey().orElse(LocalDateTime.MAX))
+                .thenComparing(Task::getDesc, String.CASE_INSENSITIVE_ORDER);
+        items.sort(cmp);
+    }
+
+    /**
+     * Sorts tasks by date/time in descending order, then by alphabetical order. Tasks with no date go to the front.
+     */
+    public void sortByDateDescending() {
+        Comparator<Task> cmp = Comparator
+                .comparing((Task t) -> t.getSortKey().isEmpty())
+                .thenComparing((Task t) -> t.getSortKey().orElse(LocalDateTime.MIN), Comparator.reverseOrder())
+                .thenComparing(Task::getDesc, String.CASE_INSENSITIVE_ORDER);
+        items.sort(cmp);
     }
 }

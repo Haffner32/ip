@@ -1,6 +1,7 @@
 package arvee.model;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import arvee.util.DateTimeUtil;
 
 public class Event extends Task {
@@ -34,6 +35,11 @@ public class Event extends Task {
      */
     public LocalDateTime getEnd() {
         return this.end;
+    }
+
+    @Override
+    public Optional<LocalDateTime> getSortKey() {
+        return Optional.of(this.getStart());
     }
 
     @Override

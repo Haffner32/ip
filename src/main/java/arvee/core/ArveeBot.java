@@ -6,6 +6,8 @@ import arvee.model.Task;
 import arvee.parser.Parser;
 import arvee.storage.Storage;
 
+import static arvee.logic.CommandResult.Type.ERROR;
+
 public class ArveeBot {
     private final TaskList tasks;
 
@@ -67,6 +69,15 @@ public class ArveeBot {
                 Storage.save(tasks.asList());
                 return renderAdded(r.task, tasks.size());
 
+            case SORT:
+                if ("desc".equals(r.error)) {
+                    tasks.sortByDateDescending();
+                } else {
+                    tasks.sortByDateAscending();
+                }
+                Storage.save(tasks.asList());
+                return renderSortedList(tasks, r.error);
+
             case ERROR:
             default:
                 return r.error != null ? r.error : "Unknown command.";
@@ -75,6 +86,11 @@ public class ArveeBot {
 
     // ---------- render helpers (same text as your Ui previously printed) ----------
 
+    /**
+     * Returns out the string representation of list of tasks
+     * @param tasks list to be printed
+     * @return String representation of output
+     */
     private String renderList(TaskList tasks) {
         StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -83,25 +99,63 @@ public class ArveeBot {
         return sb.toString().trim();
     }
 
+    /**
+     * Returns string representation of message confirming task is marked
+     * @param t task to be marked
+     * @param done status
+     * @return message as String
+     */
     private String renderMarked(Task t, boolean done) {
         return done
                 ? "Nice! I've marked this task as done:\n " + t
                 : "Ok, I've marked this task as not done yet:\n " + t;
     }
 
+    /**
+     * Returns string representation of message confirming task is added
+     * @param t task to be added
+     * @param count total number of tasks in the list
+     * @return message as String
+     */
     private String renderAdded(Task t, int count) {
         return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list", t, count);
     }
 
+    /**
+     * Returns string representation of message confirming task is removed
+     * @param t task to be removed
+     * @param remaining remaining number of tasks in list
+     * @return message as String
+     */
     private String renderDeleted(Task t, int remaining) {
         return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.", t, remaining);
     }
 
+    /**
+     * Returns string representation of the list of tasks with description matching keyword
+     * @param results tasklist of matching tasks
+     * @return message as String
+     */
     private String renderFound(TaskList results) {
         if (results.size() == 0) return "No matching tasks found.";
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < results.size(); i++) {
             sb.append(i + 1).append(". ").append(results.get(i)).append("\n");
+        }
+        return sb.toString().trim();
+    }
+
+    /**
+     * Returns string representation of list of tasks in sorted order
+     * @param tasks task list in sorted order
+     * @param order sorted in either ascending or descending order
+     * @return message as String
+     */
+    private String renderSortedList(TaskList tasks, String order) {
+        StringBuilder sb = new StringBuilder("Sorted by date/time (" + order + ").\n");
+        sb.append("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1).append(". ").append(tasks.get(i + 1)).append("\n"); // note 1-based get()
         }
         return sb.toString().trim();
     }

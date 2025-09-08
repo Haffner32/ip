@@ -1,5 +1,8 @@
 package arvee.model;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 public class Task {
     private String desc;
     private boolean done;
@@ -35,6 +38,14 @@ public class Task {
      */
     public boolean isDone() {
         return this.done;
+    }
+
+    /**
+     * getter for deadline of the task if applicable
+     * @return optional containing the LocalDateTime of task deadline
+     */
+    public Optional<LocalDateTime> getSortKey() {
+        return Optional.empty();
     }
 
     @Override
