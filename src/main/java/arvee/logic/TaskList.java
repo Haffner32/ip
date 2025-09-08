@@ -38,6 +38,8 @@ public class TaskList {
      * @return the corresponding task
      */
     public Task get(int oneBasedIndex) {
+        assert oneBasedIndex > 0: "Index must be positive";
+        assert oneBasedIndex < items.size() : "Index out of range: " + oneBasedIndex;
         int index = oneBasedIndex - 1;
         return items.get(index);
     }

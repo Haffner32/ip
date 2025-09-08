@@ -89,6 +89,7 @@ public class Storage {
         } catch (IOException e) {
             System.err.println("Failed to read save file: " + e.getMessage());
         }
+        assert items != null : "Tasks list should never be null after loading";
         return items;
     }
 

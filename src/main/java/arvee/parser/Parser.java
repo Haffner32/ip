@@ -14,9 +14,12 @@ public class Parser {
      * @return
      */
     public static CommandResult parse(String input) {
+        assert input != null : "User input should not be null";
         input = input.trim();
+      assert !input.isEmpty() : "User input should not be empty";
         if (input.equals(Constants.CMD_BYE)) return CommandResult.bye();
         if (input.equals(Constants.CMD_LIST)) return CommandResult.list();
+
 
         if (input.startsWith(Constants.CMD_MARK + " ")) {
             int idx = Integer.parseInt(input.substring(5));
