@@ -1,6 +1,7 @@
 package arvee.parser;
 
 import arvee.logic.CommandResult;
+import arvee.util.Constants;
 import arvee.util.DateTimeUtil;
 import arvee.model.ToDoTask;
 import arvee.model.Deadlines;
@@ -15,30 +16,31 @@ public class Parser {
     public static CommandResult parse(String input) {
         assert input != null : "User input should not be null";
         input = input.trim();
-        assert !input.isEmpty() : "User input should not be empty";
-        if (input.equals("bye")) return CommandResult.bye();
-        if (input.equals("list")) return CommandResult.list();
+      assert !input.isEmpty() : "User input should not be empty";
+        if (input.equals(Constants.CMD_BYE)) return CommandResult.bye();
+        if (input.equals(Constants.CMD_LIST)) return CommandResult.list();
 
-        if (input.startsWith("mark ")) {
+
+        if (input.startsWith(Constants.CMD_MARK + " ")) {
             int idx = Integer.parseInt(input.substring(5));
             return CommandResult.mark(idx, true);
         }
-        if (input.startsWith("unmark ")) {
+        if (input.startsWith(Constants.CMD_UNMARK + " ")) {
             int idx = Integer.parseInt(input.substring(7));
             return CommandResult.mark(idx, false);
         }
-        if (input.startsWith("todo")) {
+        if (input.startsWith(Constants.CMD_TODO)) {
             String desc = input.substring(5).trim();
             return CommandResult.add(new ToDoTask(desc));
         }
-        if (input.startsWith("deadline")) {
+        if (input.startsWith(Constants.CMD_DEADLINE)) {
             String rest = input.substring(9).trim();
             String[] parts = rest.split("/by", 2);
             if (parts.length < 2) return CommandResult.error("Deadline format: deadline <desc> /by <date>");
             var by = DateTimeUtil.parseFlexible(parts[1].trim());
             return CommandResult.add(new Deadlines(parts[0].trim(), by));
         }
-        if (input.startsWith("event")) {
+        if (input.startsWith(Constants.CMD_EVENT)) {
             String rest = input.substring(6).trim();
             String[] p1 = rest.split("/from", 2);
             if (p1.length < 2) return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
@@ -48,7 +50,7 @@ public class Parser {
             var end   = DateTimeUtil.parseFlexible(p2[1].trim());
             return CommandResult.add(new Event(p1[0].trim(), start, end));
         }
-        if (input.startsWith("delete")) {
+        if (input.startsWith(Constants.CMD_DELETE)) {
             String[] parts = input.trim().split("\\s", 2);
             if (parts.length < 2) {
                 return CommandResult.error("Usage: delete INDEX");
@@ -60,7 +62,7 @@ public class Parser {
                 return CommandResult.error("Index must be a number");
             }
         }
-        if (input.startsWith("find")) {
+        if (input.startsWith(Constants.CMD_FIND)) {
             String[] parts = input.trim().split("\\s", 2);
             if (parts.length < 2) {
                 return CommandResult.error("Usage: find KEYWORD");
