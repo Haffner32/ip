@@ -13,7 +13,9 @@ public class Parser {
      * @return
      */
     public static CommandResult parse(String input) {
+        assert input != null : "User input should not be null";
         input = input.trim();
+        assert !input.isEmpty() : "User input should not be empty";
         if (input.equals("bye")) return CommandResult.bye();
         if (input.equals("list")) return CommandResult.list();
 

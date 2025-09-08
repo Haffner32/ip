@@ -62,6 +62,7 @@ public class ArveeBot {
             }
 
             case ADD:
+                assert r.task != null : "Added task must not be null";
                 tasks.add(r.task);
                 Storage.save(tasks.asList());
                 return renderAdded(r.task, tasks.size());
