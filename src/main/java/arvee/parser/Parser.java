@@ -15,10 +15,17 @@ public class Parser {
      */
     public static CommandResult parse(String input) {
         assert input != null : "User input should not be null";
+        if (input == null || input.trim().isEmpty()) {
+            return CommandResult.error("Command cannot be empty!");
+        }
         input = input.trim();
       assert !input.isEmpty() : "User input should not be empty";
-        if (input.equals(Constants.CMD_BYE)) return CommandResult.bye();
-        if (input.equals(Constants.CMD_LIST)) return CommandResult.list();
+        if (input.equals(Constants.CMD_BYE)) {
+            return CommandResult.bye();
+        }
+        if (input.equals(Constants.CMD_LIST)) {
+            return CommandResult.list();
+        }
         if (input.equals(Constants.CMD_SORT)) {
             return CommandResult.sort("asc");
         }
@@ -30,32 +37,50 @@ public class Parser {
 
 
         if (input.startsWith(Constants.CMD_MARK + " ")) {
+            if (!input.matches("^mark \\d+$")) {
+                return CommandResult.error("Usage: mark <task number>");
+            }
             int idx = Integer.parseInt(input.substring(5));
             return CommandResult.mark(idx, true);
         }
         if (input.startsWith(Constants.CMD_UNMARK + " ")) {
+            if (!input.matches("^unmark \\d+$")) {
+                return CommandResult.error("Usage: unmark <task number>");
+            }
             int idx = Integer.parseInt(input.substring(7));
             return CommandResult.mark(idx, false);
         }
         if (input.startsWith(Constants.CMD_TODO)) {
+            if (!input.matches("^todo\\s+.+$")) {
+                return CommandResult.error("Usage: todo <task description>");
+            }
             String desc = input.substring(5).trim();
             return CommandResult.add(new ToDoTask(desc));
         }
         if (input.startsWith(Constants.CMD_DEADLINE)) {
             String rest = input.substring(9).trim();
             String[] parts = rest.split("/by", 2);
-            if (parts.length < 2) return CommandResult.error("Deadline format: deadline <desc> /by <date>");
+            if (parts.length < 2) {
+                return CommandResult.error("Deadline format: deadline <desc> /by <date>");
+            }
             var by = DateTimeUtil.parseFlexible(parts[1].trim());
             return CommandResult.add(new Deadlines(parts[0].trim(), by));
         }
         if (input.startsWith(Constants.CMD_EVENT)) {
             String rest = input.substring(6).trim();
             String[] p1 = rest.split("/from", 2);
-            if (p1.length < 2) return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
+            if (p1.length < 2) {
+                return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
+            }
             String[] p2 = p1[1].trim().split("/to", 2);
-            if (p2.length < 2) return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
+            if (p2.length < 2) {
+                return CommandResult.error("arvee.model.Event format: event <desc> /from <start> /to <end>");
+            }
             var start = DateTimeUtil.parseFlexible(p2[0].trim());
-            var end   = DateTimeUtil.parseFlexible(p2[1].trim());
+            var end = DateTimeUtil.parseFlexible(p2[1].trim());
+            if (start.isAfter(end) || start.equals(end)) {
+                return CommandResult.error("Start time must be before end time!");
+            }
             return CommandResult.add(new Event(p1[0].trim(), start, end));
         }
         if (input.startsWith(Constants.CMD_DELETE)) {
