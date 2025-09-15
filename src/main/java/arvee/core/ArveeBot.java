@@ -6,8 +6,6 @@ import arvee.model.Task;
 import arvee.parser.Parser;
 import arvee.storage.Storage;
 
-import static arvee.logic.CommandResult.Type.ERROR;
-
 public class ArveeBot {
     private final TaskList tasks;
 
@@ -39,28 +37,28 @@ public class ArveeBot {
         }
 
         switch (r.type) {
-            case FIND: {
+            case FIND:
                 String keyword = r.error;
                 TaskList results = new TaskList(tasks.find(keyword));
                 return renderFound(results);
-            }
-            case DELETE: {
+
+            case DELETE:
                 Task deleted = tasks.get(r.index);
                 tasks.remove(r.index);
                 Storage.save(tasks.asList());
                 return renderDeleted(deleted, tasks.size());
-            }
+
             case BYE:
                 return "Bye. Hope to see you again soon!";
 
             case LIST:
                 return renderList(tasks);
 
-            case MARK: {
+            case MARK:
                 Task t = tasks.mark(r.index, r.markDone);
                 Storage.save(tasks.asList());
                 return renderMarked(t, r.markDone);
-            }
+
 
             case ADD:
                 assert r.task != null : "Added task must not be null";
@@ -89,7 +87,7 @@ public class ArveeBot {
      * @return String representation of output
      */
     private String renderList(TaskList tasks) {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder sb = new StringBuilder("Alright, here's your precious to-do list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1).append(". ").append(tasks.get(i + 1)).append("\n");
         }
@@ -104,8 +102,8 @@ public class ArveeBot {
      */
     private String renderMarked(Task t, boolean done) {
         return done
-                ? "Nice! I've marked this task as done:\n " + t
-                : "Ok, I've marked this task as not done yet:\n " + t;
+                ? "Boom! Task marked as done, don't you feel accomplished?:\n " + t
+                : "Bruh..., fine I've marked this task as not done yet:\n " + t;
     }
 
     /**
@@ -115,7 +113,7 @@ public class ArveeBot {
      * @return message as String
      */
     private String renderAdded(Task t, int count) {
-        return String.format("Got it. I've added this task:\n %s\nNow you have %d tasks in the list", t, count);
+        return String.format("Wow... another task for Mr Busy: %s. Now you are juggling %d tasks", t, count);
     }
 
     /**
@@ -125,7 +123,7 @@ public class ArveeBot {
      * @return message as String
      */
     private String renderDeleted(Task t, int remaining) {
-        return String.format("Noted. I've removed this task:\n %s\nNow you have %d tasks in the list.", t, remaining);
+        return String.format("I've removed this task my liege:\n %s\nNow you have %d tasks in the list.", t, remaining);
     }
 
     /**
@@ -134,8 +132,10 @@ public class ArveeBot {
      * @return message as String
      */
     private String renderFound(TaskList results) {
-        if (results.size() == 0) return "No matching tasks found.";
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
+        if (results.size() == 0) {
+            return "Found zero, zilch, nada.";
+        }
+        StringBuilder sb = new StringBuilder("Here's what Sherlock himself found for you:\n");
         for (int i = 0; i < results.size(); i++) {
             sb.append(i + 1).append(". ").append(results.get(i)).append("\n");
         }
@@ -150,7 +150,7 @@ public class ArveeBot {
      */
     private String renderSortedList(TaskList tasks, String order) {
         StringBuilder sb = new StringBuilder("Sorted by date/time (" + order + ").\n");
-        sb.append("Here are the tasks in your list:\n");
+        sb.append("Behold, your tasks now in order for Mr OCD:\n");
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1).append(". ").append(tasks.get(i + 1)).append("\n"); // note 1-based get()
         }
