@@ -40,7 +40,6 @@ public class ArveeBot {
 
         switch (r.type) {
             case FIND: {
-                // In your code, FIND’s keyword is carried in r.error
                 String keyword = r.error;
                 TaskList results = new TaskList(tasks.find(keyword));
                 return renderFound(results);
@@ -83,8 +82,6 @@ public class ArveeBot {
                 return r.error != null ? r.error : "Unknown command.";
         }
     }
-
-    // ---------- render helpers (same text as your Ui previously printed) ----------
 
     /**
      * Returns out the string representation of list of tasks
