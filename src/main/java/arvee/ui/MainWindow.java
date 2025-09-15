@@ -34,7 +34,9 @@ public class MainWindow {
     public void initialize() {
         // auto-scroll to bottom when new content arrives
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        // (optional) disable Send when input is empty
+        dialogContainer.prefWidthProperty().bind(
+               scrollPane.widthProperty().subtract(16)
+        );
         sendButton.disableProperty().bind(userInput.textProperty().isEmpty());
     }
 
