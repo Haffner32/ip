@@ -1,5 +1,5 @@
 E | 0 | lecture | 2025-12-29T14:00 | 2025-12-29T18:00
-T | 0 | clean
+T | 1 | clean
 T | 0 | go for lesson
 T | 1 | gym
 T | 0 | laundry
