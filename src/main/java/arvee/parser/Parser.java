@@ -1,12 +1,15 @@
 package arvee.parser;
 
 import arvee.logic.CommandResult;
-import arvee.util.Constants;
-import arvee.util.DateTimeUtil;
-import arvee.model.ToDoTask;
 import arvee.model.Deadlines;
 import arvee.model.Event;
+import arvee.model.ToDoTask;
+import arvee.util.Constants;
+import arvee.util.DateTimeUtil;
 
+/**
+ * Class that encapsulates the parsing of user input.
+ */
 public class Parser {
     /**
      * parses the corresponding input for the command word, and creates a corresponding CommandResult object
