@@ -1,109 +1,126 @@
-# Arvee Chatbot 🤖
+# Arvee Chatbot
 
-Arvee is a personal task management chatbot. It helps you keep track of your todos, deadlines, and events — all from a simple chat-style interface.  
+Arvee is a simple chatbot application built for managing tasks. It allows you to add, list, delete, mark, find, and sort tasks, with both CLI and GUI support (JavaFX).
 
----
+## Features
 
-## ✨ Features
+- Add tasks (todo, deadline, event)
+- List all tasks
+- Mark and unmark tasks as done
+- Delete tasks
+- Find tasks by keyword
+- Sort tasks chronologically (ascending/descending)
+- Interactive GUI with JavaFX
+- Data persistence with file storage
 
-- **Add tasks**:  
-  - `todo read book`  
-  - `deadline return book /by 2025-10-15`  
-  - `event project meeting /from 2025-10-10 1400 /to 2025-10-10 1600`  
+--- 
 
-- **List tasks**:  
-  ```
-  list
-  ```
-
-- **Mark and unmark tasks**:  
-  ```
-  mark 2
-  unmark 3
-  ```
-
-- **Delete tasks**:  
-  ```
-  delete 1
-  ```
-
-- **Find tasks by keyword**:  
-  ```
-  find book
-  ```
-
-- **Sort tasks** chronologically (by deadline or start time):  
-  ```
-  sort asc
-  sort desc
-  ```
-
-- **Save and load tasks** automatically between sessions.  
-
-- **Graphical User Interface (GUI)** built with JavaFX.  
-
----
-
-
-## 📸 Screenshots
-
-Here’s a preview of Arvee’s GUI:  
-
-![Screenshot of Arvee chatbot](./docs/Ui.png)  
-
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- [Java 17](https://adoptium.net/) or later  
-- [Gradle](https://gradle.org/) (wrapper included)
+- **Java 17 or later** must be installed.  
+- **Gradle** is recommended for building and running.
 
-### Running the App
+--- 
+
+### Installation
+Clone the repository:
+```bash
+git clone https://github.com/YOUR_USERNAME/ip.git
+cd ip
+```
+
+Build the project with Gradle:
+```bash
+./gradlew build
+```
+
+Run the chatbot:
 ```bash
 ./gradlew run
 ```
 
----
-
-## 🧪 Running Tests
-JUnit tests are included. To run them:  
+Or run using the JAR file:
 ```bash
-./gradlew test
+java -jar arvee.jar
+```
+---
+
+## User Guide
+
+### Adding a Task
+- **Todo**
+  ```text
+  todo read book
+  ```
+- **Deadline**
+  ```text
+  deadline submit report /by 2025-09-21
+  ```
+- **Event**
+  ```text
+  event project meeting /at 2025-09-25 14:00
+  ```
+
+### Listing Tasks
+```text
+list
 ```
 
----
-
-## 🏗️ Project Structure
-```
-src
- ├─ main
- │   ├─ java
- │   │   ├─ arvee
- │   │   │   ├─ core
- │   │   │   ├─ logic
- │   │   │   ├─ model
- │   │   │   ├─ storage
- │   │   │   └─ ui
- │   └─ resources
- │       └─ images
- └─ test
-     └─ java
+### Marking and Unmarking
+```text
+mark 2
+unmark 2
 ```
 
+### Deleting a Task
+```text
+delete 3
+```
+
+### Finding Tasks
+```text
+find book
+```
+
+### Sorting Tasks
+```text
+sort asc
+sort desc
+```
+
+### Exiting
+```text
+bye
+```
 ---
+### Command Summary
 
-## 📝 Roadmap
+| Command      | Format                                        |
+|--------------|-----------------------------------------------|
+| **Todo**     | `todo DESCRIPTION`                            |
+| **Deadline** | `deadline DESCRIPTION /by YYYY-MM-DD [HH:MM]` |
+| **Event**    | `event DESCRIPTION /at YYYY-MM-DD HH:MM`      |
+| **List**     | `list`                                        |
+| **Mark**     | `mark INDEX`                                  |
+| **Unmark**   | `unmark INDEX`                                |
+| **Delete**   | `delete INDEX`                                |
+| **Find**     | `find KEYWORD`                                |
+| **Sort**     | `sort asc` or `sort desc`                     |
+| **Exit**     | `bye`                                         |
+---
+## Screenshots
 
-- [x] Add GUI  
-- [x] Add ability to sort tasks  
-- [ ] Enhance error handling with more descriptive feedback  
-- [ ] Add recurring tasks support  
+Here’s a preview of Arvee’s GUI:
+
+![Screenshot of Arvee chatbot](./docs/Ui.png)
 
 ---
+## Development
 
-## 🤝 Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.  
-
----
+This project uses:
+- Java 17
+- JavaFX
+- Gradle
+- JUnit 5
 
