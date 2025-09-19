@@ -1,86 +1,109 @@
-Arvee 🤖
+# Arvee Chatbot 🤖
 
+Arvee is a personal task management chatbot. It helps you keep track of your todos, deadlines, and events — all from a simple chat-style interface.  
 
+---
 
-Arvee is a simple personal task manager chatbot built in Java.  
+## ✨ Features
 
-It helps you keep track of todos, deadlines, and events, directly from the command line or a graphical user interface (GUI) built with JavaFX.
+- **Add tasks**:  
+  - `todo read book`  
+  - `deadline return book /by 2025-10-15`  
+  - `event project meeting /from 2025-10-10 1400 /to 2025-10-10 1600`  
 
+- **List tasks**:  
+  ```
+  list
+  ```
 
+- **Mark and unmark tasks**:  
+  ```
+  mark 2
+  unmark 3
+  ```
+
+- **Delete tasks**:  
+  ```
+  delete 1
+  ```
+
+- **Find tasks by keyword**:  
+  ```
+  find book
+  ```
+
+- **Sort tasks** chronologically (by deadline or start time):  
+  ```
+  sort asc
+  sort desc
+  ```
+
+- **Save and load tasks** automatically between sessions.  
+
+- **Graphical User Interface (GUI)** built with JavaFX.  
 
 ---
 
 
+## 📸 Screenshots
 
-&nbsp;Features
+Here’s a preview of Arvee’s GUI:  
 
-
-
-\- \*\*Task Management\*\*
-
-&nbsp; - `todo`: Add a todo task
-
-&nbsp; - `deadline`: Add a deadline with a due date/time
-
-&nbsp; - `event`: Add an event with start/end times
-
-&nbsp; - `list`: View all tasks in the list
-
-&nbsp; - `mark` / `unmark`: Mark tasks as done or not done
-
-&nbsp; - `delete`: Remove tasks
-
-&nbsp; - `find`: Search tasks by keyword
-
-
-
-\- \*\*Persistent Storage\*\*
-
-&nbsp; - Tasks are automatically saved to `./data/duke.txt`
-
-&nbsp; - Saved tasks are reloaded the next time you start Arvee
-
-
-
-\- \*\*Date \& Time Support\*\*
-
-&nbsp; - Deadlines and events accept dates in `yyyy-MM-dd` or `yyyy-MM-dd HHmm` format
-
-&nbsp; - Displayed in a human-friendly format, e.g. `Oct 15 2019`
-
-
-
-\- \*\*GUI (JavaFX)\*\*
-
-&nbsp; - Interactive chatbot interface
-
-&nbsp; - Messages appear as chat bubbles (user on right, Arvee on left)
-
-&nbsp; - Auto-scrolling and input disabled on exit command (`bye`)
-
-
+![Screenshot of Arvee chatbot](./docs/Ui.png)  
 
 ---
 
+## 🚀 Getting Started
 
+### Prerequisites
+- [Java 17](https://adoptium.net/) or later  
+- [Gradle](https://gradle.org/) (wrapper included)
 
-\##  Getting Started
-
-
-
-\### Prerequisites
-
-\- Java \*\*17\*\* or above
-
-\- Gradle (wrapper included, no need to install separately)
-
-
-
-\### Build \& Run (CLI)
-
+### Running the App
 ```bash
-
 ./gradlew run
+```
 
+---
 
+## 🧪 Running Tests
+JUnit tests are included. To run them:  
+```bash
+./gradlew test
+```
+
+---
+
+## 🏗️ Project Structure
+```
+src
+ ├─ main
+ │   ├─ java
+ │   │   ├─ arvee
+ │   │   │   ├─ core
+ │   │   │   ├─ logic
+ │   │   │   ├─ model
+ │   │   │   ├─ storage
+ │   │   │   └─ ui
+ │   └─ resources
+ │       └─ images
+ └─ test
+     └─ java
+```
+
+---
+
+## 📝 Roadmap
+
+- [x] Add GUI  
+- [x] Add ability to sort tasks  
+- [ ] Enhance error handling with more descriptive feedback  
+- [ ] Add recurring tasks support  
+
+---
+
+## 🤝 Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.  
+
+---
 
