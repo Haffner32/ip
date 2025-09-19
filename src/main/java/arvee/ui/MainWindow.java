@@ -65,6 +65,8 @@ public class MainWindow {
         userInput.clear();
 
         if (bot.shouldExit(input)) {
+            sendButton.disableProperty().unbind();
+            userInput.disableProperty().unbind();
             userInput.setDisable(true);
             sendButton.setDisable(true);
         }
